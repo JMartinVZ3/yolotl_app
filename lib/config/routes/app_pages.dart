@@ -1,3 +1,4 @@
+import 'package:flame/game.dart';
 import 'package:yolotl/features/auth/view/bindings/login_binding.dart';
 import 'package:yolotl/features/auth/view/bindings/register_binding.dart';
 import 'package:yolotl/features/auth/view/pages/loading_page.dart';
@@ -59,7 +60,11 @@ abstract class AppPages {
 
     GetPage<dynamic>(
       name: Routes.PLAY,
-      page: () => const PlayPage(),
+      page: () {
+        return GameWidget(
+          game: PlayPage(),
+        );
+      },
     ),
   ];
 }
