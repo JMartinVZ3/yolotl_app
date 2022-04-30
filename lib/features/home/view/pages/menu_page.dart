@@ -3,12 +3,16 @@ import 'package:get/get.dart';
 import 'package:yolotl/config/colors.dart';
 import 'package:yolotl/config/routes/app_routes.dart';
 import 'package:yolotl/core/services/auth_service.dart';
+import 'package:yolotl/features/home/view/controllers/yolotl_controller.dart';
+import 'package:yolotl/features/home/view/widgets/widgets.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final YolotlController yolotlController = Get.find<YolotlController>();
+
     return Container(
       decoration: BoxDecoration(
         color: YolotlColors.lightYellow,
@@ -32,7 +36,7 @@ class MenuPage extends StatelessWidget {
                   clipBehavior: Clip.antiAlias,
                   child: InkWell(
                     onTap: () {
-                      AuthService.deleteToken();
+                      insulinaDialog();
                     },
                     child: Container(
                       height: 60,
@@ -55,7 +59,9 @@ class MenuPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100),
                   clipBehavior: Clip.antiAlias,
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(Routes.PLAY_SHOWCASE);
+                    },
                     child: Container(
                       height: 60,
                       width: 60,
@@ -126,7 +132,94 @@ class MenuPage extends StatelessWidget {
               ),
             ),
           ),
-        )
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: GestureDetector(
+            onTap: () {
+              yolotlController.changeYolotlState();
+            },
+            child: Obx(() {
+              switch (yolotlController.yolotlState.value) {
+                case YolotlState.Happy:
+                  return Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 80,
+                      right: 20,
+                    ),
+                    height: 300,
+                    width: 240,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: Image.asset("images/ajolote1.png").image,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  );
+                case YolotlState.Angry:
+                  return Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 80,
+                      right: 20,
+                    ),
+                    height: 300,
+                    width: 240,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: Image.asset("images/ajolote3.png").image,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  );
+                case YolotlState.Sad:
+                  return Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 80,
+                      right: 20,
+                    ),
+                    height: 300,
+                    width: 240,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: Image.asset("images/ajolote4.png").image,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  );
+                case YolotlState.Surprised:
+                  return Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 80,
+                      right: 20,
+                    ),
+                    height: 300,
+                    width: 240,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: Image.asset("images/ajolote2.png").image,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  );
+                default:
+                  return Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 80,
+                      right: 20,
+                    ),
+                    height: 300,
+                    width: 240,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: Image.asset("images/ajolote1.png").image,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  );
+              }
+            }),
+          ),
+        ),
       ]),
     );
   }

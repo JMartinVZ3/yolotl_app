@@ -73,11 +73,12 @@ class _Body extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 5,
+          flex: 6,
           child: Container(
               decoration: BoxDecoration(
             image: DecorationImage(
-                image: Image.asset('images/caraAjolote.png').image),
+                image: Image.asset('images/ajolote1.png').image,
+                fit: BoxFit.contain),
           )),
         ),
         const Spacer(

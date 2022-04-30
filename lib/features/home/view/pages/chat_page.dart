@@ -14,10 +14,10 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
-  final _textController = new TextEditingController();
-  final _focusNode = new FocusNode();
+  final _textController = TextEditingController();
+  final _focusNode = FocusNode();
 
-  List<ChatMessage> _messages = [];
+  final List<ChatMessage> _messages = [];
 
   bool _estaEscribiendo = false;
 
@@ -29,25 +29,35 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: YolotlColors.orange,
-        toolbarHeight: 75,
-        leading: IconButton(
-          color: Colors.white,
-          iconSize: kIconSize / 1.5,
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back_ios_rounded),
-        ),
-        centerTitle: true,
-        title: Text(
-          'Yolotl',
-          overflow: TextOverflow.ellipsis,
-          softWrap: false,
-          style: Get.textTheme.headline4!.copyWith(color: YolotlColors.white),
-        ),
-      ),
+      backgroundColor: YolotlColors.lightOrange,
       body: Column(
         children: <Widget>[
+          Container(
+            height: 120,
+            color: YolotlColors.lightYellow,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Material(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(100),
+                    clipBehavior: Clip.antiAlias,
+                    child: InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: const Icon(
+                          Icons.arrow_back_ios_new_rounded,
+                          size: kIconSize,
+                        )),
+                  ),
+                ),
+                Image.asset("images/caraAjolote.png")
+              ],
+            ),
+          ),
           Flexible(
               child: ListView.builder(
             physics: const BouncingScrollPhysics(),
@@ -56,8 +66,8 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
             reverse: true,
           )),
           Container(
-            height: MediaQuery.of(context).size.height / 7,
-            decoration: BoxDecoration(color: Theme.of(context).cardColor),
+            height: 100,
+            decoration: const BoxDecoration(color: YolotlColors.lightYellow),
             child: _inputYolotl(),
           )
         ],
@@ -66,83 +76,80 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   }
 
   Widget _inputYolotl() {
-    return SafeArea(
-        child: Container(
-      margin: EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Expanded(
-            child: Container(
-                padding: EdgeInsets.all(20),
-                height: 80,
-                decoration: BoxDecoration(
-                    color: Theme.of(context).canvasColor,
-                    borderRadius: BorderRadius.circular(kBorderRadius)),
-                child: TextField(
-                  style: Theme.of(context).textTheme.bodyText2,
-                  controller: _textController,
-                  onSubmitted: _handleSubmit,
-                  onChanged: (texto) {
-                    setState(() {
-                      if (texto.trim().length > 0) {
-                        _estaEscribiendo = true;
-                      } else {
-                        _estaEscribiendo = false;
-                      }
-                    });
-                  },
-                  decoration:
-                      InputDecoration.collapsed(hintText: 'Enviar mensaje'),
-                  focusNode: _focusNode,
-                )),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 4.0),
-            child: Platform.isIOS
-                ? CupertinoButton(
-                    child: Text('Enviar'),
-                    onPressed: _estaEscribiendo
-                        ? () => _handleSubmit(_textController.text.trim())
-                        : null,
-                  )
-                : Container(
-                    margin: EdgeInsets.symmetric(horizontal: 4.0),
-                    child: IconTheme(
-                      data: IconThemeData(
-                        color: YolotlColors.orange,
-                      ),
-                      child: IconButton(
-                        highlightColor: Colors.transparent,
-                        splashColor: Colors.transparent,
-                        icon: Icon(Icons.send),
-                        onPressed: _estaEscribiendo
-                            ? () => _handleSubmit(_textController.text.trim())
-                            : null,
-                      ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Expanded(
+          child: Container(
+              margin: const EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.all(20),
+              height: 60,
+              decoration: BoxDecoration(
+                  color: Theme.of(context).canvasColor,
+                  borderRadius: BorderRadius.circular(kBorderRadius)),
+              child: TextField(
+                style: Theme.of(context).textTheme.bodyText2,
+                controller: _textController,
+                onSubmitted: _handleSubmit,
+                onChanged: (texto) {
+                  setState(() {
+                    if (texto.trim().isNotEmpty) {
+                      _estaEscribiendo = true;
+                    } else {
+                      _estaEscribiendo = false;
+                    }
+                  });
+                },
+                decoration:
+                    const InputDecoration.collapsed(hintText: 'Enviar mensaje'),
+                focusNode: _focusNode,
+              )),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 4.0),
+          child: Platform.isIOS
+              ? CupertinoButton(
+                  child: const Text('Enviar'),
+                  onPressed: _estaEscribiendo
+                      ? () => _handleSubmit(_textController.text.trim())
+                      : null,
+                )
+              : Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                  child: IconTheme(
+                    data: const IconThemeData(
+                      color: YolotlColors.orange,
+                    ),
+                    child: IconButton(
+                      highlightColor: Colors.transparent,
+                      splashColor: Colors.transparent,
+                      icon: const Icon(Icons.send),
+                      onPressed: _estaEscribiendo
+                          ? () => _handleSubmit(_textController.text.trim())
+                          : null,
                     ),
                   ),
-          )
-        ],
-      ),
-    ));
+                ),
+        )
+      ],
+    );
   }
 
   _handleSubmit(String texto) async {
     final ChatController chatController = Get.find<ChatController>();
 
     final userController = Get.find<UserController>();
-    if (texto.length == 0) return;
+    if (texto.isEmpty) return;
 
     _textController.clear();
     _focusNode.requestFocus();
 
-    final newMessage = new ChatMessage(
+    final newMessage = ChatMessage(
       uid: userController.user.uid,
       texto: texto,
       animationController: AnimationController(
-          vsync: this, duration: Duration(milliseconds: 200)),
+          vsync: this, duration: const Duration(milliseconds: 200)),
     );
     _messages.insert(0, newMessage);
     newMessage.animationController.forward();
@@ -150,11 +157,13 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
     final String textoBot =
         await chatController.remoteGetCompletion(text: texto);
 
-    ChatMessage botMessage = new ChatMessage(
+    ChatMessage botMessage = ChatMessage(
       texto: textoBot,
       uid: 'panabot',
       animationController: AnimationController(
-          vsync: this, duration: Duration(milliseconds: 300)),
+        vsync: this,
+        duration: const Duration(milliseconds: 300),
+      ),
     );
 
     setState(() {

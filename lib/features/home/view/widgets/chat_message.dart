@@ -22,9 +22,8 @@ class ChatMessage extends StatelessWidget {
         sizeFactor:
             CurvedAnimation(parent: animationController, curve: Curves.easeOut),
         child: Container(
-          child: this.uid == userController.user.uid
-              ? _myMessage()
-              : _notMyMessage(),
+          child:
+              uid == userController.user.uid ? _myMessage() : _notMyMessage(),
         ),
       ),
     );
@@ -34,14 +33,14 @@ class ChatMessage extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: Container(
-        padding: EdgeInsets.all(8.0),
-        margin: EdgeInsets.only(right: 5, bottom: 5, left: 50),
+        padding: const EdgeInsets.all(8.0),
+        margin: const EdgeInsets.only(right: 5, bottom: 5, left: 50),
         child: Text(
-          this.texto,
-          style: TextStyle(color: Colors.white),
+          texto,
+          style: const TextStyle(color: Colors.black),
         ),
         decoration: BoxDecoration(
-          color: YolotlColors.orange,
+          color: const Color(0XFFFFFBEE),
           borderRadius: BorderRadius.circular(20),
         ),
       ),
@@ -52,14 +51,15 @@ class ChatMessage extends StatelessWidget {
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(
-        padding: EdgeInsets.all(8.0),
-        margin: EdgeInsets.only(left: 5, bottom: 5, right: 50),
+        padding: const EdgeInsets.all(8.0),
+        margin: const EdgeInsets.only(left: 5, bottom: 5, right: 50),
         child: Text(
-          this.texto,
-          style: TextStyle(color: Colors.black87),
+          texto,
+          style: const TextStyle(color: Colors.white),
         ),
         decoration: BoxDecoration(
-            color: Color(0xffE4E5E8), borderRadius: BorderRadius.circular(20)),
+            color: YolotlColors.orange,
+            borderRadius: BorderRadius.circular(20)),
       ),
     );
   }

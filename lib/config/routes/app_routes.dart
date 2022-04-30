@@ -20,4 +20,10 @@ abstract class Routes {
 
   ///Ruta
   static const String CHAT = '/chat';
+
+  ///Ruta
+  static const String PLAY = '/play';
+
+  ///Ruta
+  static const String PLAY_SHOWCASE = '/play/showcase';
 }
