@@ -55,7 +55,7 @@ class _Body extends StatelessWidget {
       ),
       Padding(
         padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-        child: PurpleButton(
+        child: OrangeButton(
           text: 'Iniciar Sesión',
           onPressed: () {
             controller.validateLogin();

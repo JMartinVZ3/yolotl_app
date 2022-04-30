@@ -35,13 +35,13 @@ class YolotlFonts {
   static TextStyle paragraph1 = GoogleFonts.openSans(
     fontWeight: FontWeight.bold,
     fontSize: 18,
-    color: YolotlColors.grey,
+    color: YolotlColors.black,
   );
 
   /// Opens Sans
   static TextStyle paragraph2 = GoogleFonts.openSans(
     fontWeight: FontWeight.normal,
     fontSize: 18,
-    color: YolotlColors.grey,
+    color: YolotlColors.black,
   );
 }

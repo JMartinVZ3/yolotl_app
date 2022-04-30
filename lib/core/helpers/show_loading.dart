@@ -9,12 +9,12 @@ void showLoading() {
           kBorderRadius,
         )),
         contentPadding: const EdgeInsets.all(kDefaultPadding),
-        backgroundColor: YolotlColors.purple,
+        backgroundColor: YolotlColors.orange,
         content: Container(
           decoration:
               BoxDecoration(borderRadius: BorderRadius.circular(kBorderRadius)),
           child: const LinearProgressIndicator(
-            color: YolotlColors.purple,
+            color: YolotlColors.orange,
             backgroundColor: Colors.grey,
           ),
         ),

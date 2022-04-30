@@ -9,7 +9,7 @@ class StartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: YolotlColors.white,
       body: _Body(),
     );
@@ -25,37 +25,38 @@ class _Body extends StatelessWidget {
     return Column(children: [
       Expanded(
         flex: 5,
-        child: Container(
-            decoration: BoxDecoration(
-          image: DecorationImage(
-              image: Image.asset('assets/illustration1.png').image),
-        )),
+        child: Container(),
+        //Container(
+        //    decoration: BoxDecoration(
+        //  image: DecorationImage(
+        //      image: Image.asset('assets/illustration1.png').image),
+        //)),
       ),
       Text(
-        'Panabot',
+        'Yolotl',
         style: Get.textTheme.headline1,
       ),
       Padding(
-        padding:
-            EdgeInsets.symmetric(horizontal: kDefaultPadding, vertical: 10),
+        padding: const EdgeInsets.symmetric(
+            horizontal: kDefaultPadding, vertical: 10),
         child: Text(
-          "Panabot es una inteligencia artificial que te puede ayudar a hacer las tareas, e incluso responderte preguntas sobre filosofía.",
+          "",
           style: Get.textTheme.bodyText2,
         ),
       ),
-      Spacer(
+      const Spacer(
         flex: 1,
       ),
       Padding(
-        padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-        child: PurpleButton(
+        padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+        child: OrangeButton(
           text: 'Comenzar',
           onPressed: () {
             Get.toNamed(Routes.LOGIN);
           },
         ),
       ),
-      Spacer(
+      const Spacer(
         flex: 1,
       ),
     ]);

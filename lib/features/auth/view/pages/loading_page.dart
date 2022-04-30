@@ -10,8 +10,8 @@ class LoadingPage extends GetView<LoadingController> {
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
     final LoadingController loadingController = controller;
-    return Scaffold(
-      backgroundColor: YolotlColors.purple,
+    return const Scaffold(
+      backgroundColor: YolotlColors.orange,
       body: Center(
         child: CircularProgressIndicator(
           color: YolotlColors.white,

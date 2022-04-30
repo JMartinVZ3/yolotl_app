@@ -6,7 +6,7 @@ void showErrorSnackbar({required String body}) {
     'Error',
     body,
     duration: const Duration(seconds: 5),
-    backgroundColor: YolotlColors.purple,
+    backgroundColor: YolotlColors.orange,
     margin: const EdgeInsets.symmetric(
         horizontal: kDefaultPadding, vertical: kDefaultPadding),
     padding: const EdgeInsets.symmetric(

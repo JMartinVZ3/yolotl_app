@@ -1,12 +1,12 @@
 part of 'widgets.dart';
 
 // Global Green Button Of Yolotl
-class PurpleButton extends StatelessWidget {
+class OrangeButton extends StatelessWidget {
   final String text;
   final Function() onPressed;
   final bool active;
 
-  const PurpleButton({
+  const OrangeButton({
     Key? key,
     required this.text,
     required this.onPressed,
@@ -19,8 +19,9 @@ class PurpleButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: kButtonHeight,
       decoration: BoxDecoration(
-          color:
-              active ? YolotlColors.purple : YolotlColors.purple.withOpacity(0.6),
+          color: active
+              ? YolotlColors.orange
+              : YolotlColors.orange.withOpacity(0.6),
           borderRadius: BorderRadius.circular(kBorderRadius),
           boxShadow: <BoxShadow>[
             BoxShadow(

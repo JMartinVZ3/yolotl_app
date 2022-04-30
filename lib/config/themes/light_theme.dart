@@ -4,7 +4,7 @@ import '../common.dart';
 
 /// Light Theme Adamo App
 final ThemeData lightTheme = ThemeData(
-  primaryColor: YolotlColors.purple,
+  primaryColor: YolotlColors.orange,
   fontFamily: 'Lato',
   textTheme: TextTheme(
     headline1: YolotlFonts.headline1,

@@ -24,7 +24,7 @@ class CustomInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       maxLines: 1,
-      cursorColor: YolotlColors.purple,
+      cursorColor: YolotlColors.orange,
       style: const TextStyle(
         color: YolotlColors.black,
       ),
@@ -39,18 +39,18 @@ class CustomInput extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(kBorderRadius),
           borderSide: const BorderSide(
-            color: YolotlColors.purple,
+            color: YolotlColors.orange,
             width: 5.0,
           ),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(kBorderRadius),
           borderSide: const BorderSide(
-            color: YolotlColors.purple,
+            color: YolotlColors.orange,
             width: 5.0,
           ),
         ),
-        fillColor: YolotlColors.purple,
+        fillColor: YolotlColors.orange,
         hoverColor: Colors.red,
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(kBorderRadius),
@@ -64,14 +64,14 @@ class CustomInput extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(kBorderRadius),
           borderSide: const BorderSide(
-            color: YolotlColors.purple,
+            color: YolotlColors.orange,
             width: 5.0,
           ),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(kBorderRadius),
           borderSide: const BorderSide(
-            color: YolotlColors.purple,
+            color: YolotlColors.orange,
             width: 5.0,
           ),
         ),

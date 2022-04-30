@@ -2,7 +2,7 @@ import 'package:yolotl/config/routes/app_pages.dart';
 import 'package:yolotl/config/routes/app_routes.dart';
 import 'package:yolotl/config/themes/light_theme.dart';
 import 'package:yolotl/core/controllers/helper_controller.dart';
-import 'package:yolotl/features/home/view/bindings/menu_binding.dart';
+import 'package:yolotl/features/auth/view/bindings/loading_binding.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Festa',
       theme: lightTheme,
-      initialRoute: Routes.MENU,
-      initialBinding: MenuBinding(),
+      initialRoute: Routes.LOADING,
+      initialBinding: LoadingBinding(),
       getPages: AppPages.pages,
     );
   }

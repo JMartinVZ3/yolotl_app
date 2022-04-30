@@ -57,7 +57,7 @@ class _Body extends StatelessWidget {
       ),
       Padding(
         padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-        child: PurpleButton(
+        child: OrangeButton(
           text: 'Registrarse',
           onPressed: () {
             controller.validateRegister();

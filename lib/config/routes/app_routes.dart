@@ -17,4 +17,7 @@ abstract class Routes {
   ///==============HOME===========///
   ///Ruta
   static const String MENU = '/menu';
+
+  ///Ruta
+  static const String CHAT = '/chat';
 }

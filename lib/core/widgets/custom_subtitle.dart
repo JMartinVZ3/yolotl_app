@@ -20,7 +20,7 @@ class CustomSubtitle extends StatelessWidget {
         child: Text(
           text,
           style: Get.theme.textTheme.headline3!.copyWith(
-            color: YolotlColors.darkPurple,
+            color: YolotlColors.black,
           ),
         ),
       ),
