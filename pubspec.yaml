@@ -52,6 +52,8 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   # Package that allows google sign in
   google_sign_in: ^5.2.3
+  # Package that allows making games
+  flame: ^1.1.1
 
 dev_dependencies:
   flutter_test:
