@@ -22,43 +22,46 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Expanded(
-        flex: 5,
-        child: Container(),
-        //Container(
-        //    decoration: BoxDecoration(
-        //  image: DecorationImage(
-        //      image: Image.asset('assets/illustration1.png').image),
-        //)),
-      ),
-      Text(
-        'Yolotl',
-        style: Get.textTheme.headline1,
-      ),
-      Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: kDefaultPadding, vertical: 10),
-        child: Text(
-          "",
-          style: Get.textTheme.bodyText2,
+    return Container(
+      color: YolotlColors.lightYellow,
+      child: Column(children: [
+        Expanded(
+          flex: 5,
+          child:
+          Container(
+              decoration: BoxDecoration(
+            image: DecorationImage(
+                image: Image.asset('images/yolotl3.jpeg').image),
+          )),
         ),
-      ),
-      const Spacer(
-        flex: 1,
-      ),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-        child: OrangeButton(
-          text: 'Comenzar',
-          onPressed: () {
-            Get.toNamed(Routes.LOGIN);
-          },
+        Text(
+          'Cuidando a mi Yolotl',
+          style: Get.textTheme.headline1,
         ),
-      ),
-      const Spacer(
-        flex: 1,
-      ),
-    ]);
+        Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: kDefaultPadding, vertical: 10),
+          child: Text(
+            "",
+            style: Get.textTheme.bodyText2,
+          ),
+        ),
+        const Spacer(
+          flex: 1,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+          child: OrangeButton(
+            text: 'Comenzar',
+            onPressed: () {
+              Get.toNamed(Routes.LOGIN);
+            },
+          ),
+        ),
+        const Spacer(
+          flex: 1,
+        ),
+      ]),
+    );
   }
 }
