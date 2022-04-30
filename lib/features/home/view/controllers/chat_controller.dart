@@ -9,10 +9,8 @@ import 'package:yolotl/features/home/domain/usecases/get_chat.dart';
 import 'package:yolotl/features/home/domain/usecases/get_completion.dart';
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
-import 'package:yolotl/features/home/view/widgets/widgets.dart';
 
 class ChatController extends GetxController with StateMixin<List<Message>> {
-  final List<ChatMessage> messages = [];
 
   //! Usecases
   /// Funcion que trae la respuesta del bot
@@ -50,7 +48,7 @@ class ChatController extends GetxController with StateMixin<List<Message>> {
         print(failure);
         Get.back();
 
-        return 'error :(';
+        return 'no entiendo :(';
       },
       (data) {
         Get.back();

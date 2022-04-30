@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yolotl/config/common.dart';
+import 'package:yolotl/core/services/chat_service.dart';
 import 'package:yolotl/features/auth/view/controllers/user_controller.dart';
 import 'package:yolotl/features/home/domain/entities/message.dart';
 import 'package:yolotl/features/home/view/controllers/chat_controller.dart';
@@ -15,26 +16,33 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
-  final ChatController chatController = Get.find<ChatController>();
-
   final _textController = TextEditingController();
   final _focusNode = FocusNode();
 
-  List<ChatMessage> _messages = [];
+  late ChatService chatService;
+
+  final _messages = [];
 
   bool _estaEscribiendo = false;
 
   @override
   void initState() {
     super.initState();
+
+    chatService = ChatService();
+
+    _cargarHistorial();
   }
 
-  void _cargarHistorial(List<Message> chat) async {
+  void _cargarHistorial() async {
+    final userId = Get.find<UserController>().user.uid;
+    List<Message> chat = await chatService.getChat(userId);
+
     final history = chat.map((m) => ChatMessage(
           texto: m.text,
           uid: m.from,
           animationController: AnimationController(
-              vsync: this, duration: Duration(milliseconds: 0))
+              vsync: this, duration: const Duration(milliseconds: 0))
             ..forward(),
         ));
 
@@ -75,19 +83,12 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
               ],
             ),
           ),
-          Flexible(child: chatController.obx(
-            (data) {
-              if (data != null) {
-                return ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: _messages.length,
-                  itemBuilder: (_, i) => _messages[i],
-                  reverse: true,
-                );
-              } else {
-                return Container();
-              }
-            },
+          Flexible(
+              child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            itemCount: _messages.length,
+            itemBuilder: (_, i) => _messages[i],
+            reverse: true,
           )),
           Container(
             height: 100,
