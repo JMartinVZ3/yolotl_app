@@ -14,4 +14,12 @@ abstract class UserRepository {
     required String password,
     required String name,
   });
+
+  Future<Either<Failure, User>> googleSignUp({
+    required String token,
+  });
+
+  Future<Either<Failure, User>> googleSignIn({
+    required String token,
+  });
 }

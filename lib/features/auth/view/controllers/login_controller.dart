@@ -3,23 +3,26 @@ import 'package:yolotl/core/error/failure.dart';
 import 'package:yolotl/core/helpers/helpers.dart';
 import 'package:yolotl/di/injection_container.dart';
 import 'package:yolotl/features/auth/domain/entities/user.dart';
+import 'package:yolotl/features/auth/domain/usecases/google_sign_in.dart';
 import 'package:yolotl/features/auth/domain/usecases/user_login.dart';
+import 'package:yolotl/features/auth/services/google_signin_service.dart';
 import 'package:yolotl/features/auth/view/controllers/user_controller.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-
 
 const String SERVER_FAILURE_MESSAGE = 'Ha ocurrido un error con el servidor';
 const String INACTIVE_FAILURE_MESSAGE = 'Tu cuenta aún no ha sido activada';
 const String EMAIL_FAILURE_MESSAGE = "El correo no ha sido encontrado";
 const String PASSWORD_FAILURE_MESSAGE = "La contraseña no es válida";
 
-
 class LoginController extends GetxController {
-    //! Usecases
+  //! Usecases
   /// Importamos funcion que inicia sesion
   final UserLogin userLogin = sl<UserLogin>();
+
+  /// Importamos funcion que inicia sesion con google
+  final GoogleSignIn googleSignIn = sl<GoogleSignIn>();
 
   //! Usecases Implementations
 
@@ -34,11 +37,25 @@ class LoginController extends GetxController {
     _handleUserLogin(result);
   }
 
+  Future<void> remoteGoogleSignIn({required String token}) async {
+    showLoading();
+
+    final Either<Failure, User> result = await googleSignIn.call(
+      GoogleSignInParams(
+        token: token,
+      ),
+    );
+
+    _handleUserLogin(result);
+  }
+
   //! Handlers
 
   // handle api fetch result
   void _handleUserLogin(Either<Failure, User> result) {
     result.fold((failure) {
+      GoogleSignInService.signOut();
+
       /// Removemos el showLoading()
       Get.back();
 
@@ -90,6 +107,12 @@ class LoginController extends GetxController {
     } else {
       return;
     }
+  }
+
+  validateGoogleSignIn() async {
+    final String? token = await GoogleSignInService.signInWithGoogle();
+    if (token == null) return;
+    await remoteGoogleSignIn(token: token);
   }
 
   @override

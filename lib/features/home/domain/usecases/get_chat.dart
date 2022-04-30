@@ -2,34 +2,31 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:yolotl/core/error/failure.dart';
 import 'package:yolotl/core/usecases/usecase.dart';
+import 'package:yolotl/features/home/domain/entities/message.dart';
 import 'package:yolotl/features/home/domain/repositories/bot_repository.dart';
 
-class GetCompletion implements UseCase<String, GetCompletionParams> {
+class GetChat implements UseCase<List<Message>, GetChatParams> {
   final BotRepository repository;
 
-  GetCompletion(this.repository);
+  GetChat(this.repository);
 
   @override
-  Future<Either<Failure, String>> call(GetCompletionParams params) async {
-    return await repository.getCompletion(
-      text: params.text,
+  Future<Either<Failure, List<Message>>> call(GetChatParams params) async {
+    return await repository.getChat(
       userId: params.userId,
     );
   }
 }
 
-class GetCompletionParams extends Equatable {
-  final String text;
+class GetChatParams extends Equatable {
   final String userId;
 
-  const GetCompletionParams({
-    required this.text,
+  const GetChatParams({
     required this.userId,
   });
 
   @override
   List<Object> get props => [
-        text,
         userId,
       ];
 

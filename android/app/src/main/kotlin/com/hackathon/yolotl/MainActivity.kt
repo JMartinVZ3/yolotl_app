@@ -1,4 +1,4 @@
-package com.example.yolotl
+package com.hackathon.yolotl
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -51,7 +51,9 @@ class _Body extends StatelessWidget {
             clipBehavior: Clip.antiAlias,
             borderRadius: BorderRadius.circular(10),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                controller.validateGoogleSignIn();
+              },
               child: Container(
                 height: 60,
                 decoration: BoxDecoration(

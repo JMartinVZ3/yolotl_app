@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yolotl/config/common.dart';
 import 'package:yolotl/features/auth/view/controllers/user_controller.dart';
+import 'package:yolotl/features/home/domain/entities/message.dart';
 import 'package:yolotl/features/home/view/controllers/chat_controller.dart';
 import 'package:yolotl/features/home/view/widgets/widgets.dart';
 
@@ -14,16 +15,32 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
+  final ChatController chatController = Get.find<ChatController>();
+
   final _textController = TextEditingController();
   final _focusNode = FocusNode();
 
-  final List<ChatMessage> _messages = [];
+  List<ChatMessage> _messages = [];
 
   bool _estaEscribiendo = false;
 
   @override
   void initState() {
     super.initState();
+  }
+
+  void _cargarHistorial(List<Message> chat) async {
+    final history = chat.map((m) => ChatMessage(
+          texto: m.text,
+          uid: m.from,
+          animationController: AnimationController(
+              vsync: this, duration: Duration(milliseconds: 0))
+            ..forward(),
+        ));
+
+    setState(() {
+      _messages.insertAll(0, history);
+    });
   }
 
   @override
@@ -58,12 +75,19 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
               ],
             ),
           ),
-          Flexible(
-              child: ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemCount: _messages.length,
-            itemBuilder: (_, i) => _messages[i],
-            reverse: true,
+          Flexible(child: chatController.obx(
+            (data) {
+              if (data != null) {
+                return ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: _messages.length,
+                  itemBuilder: (_, i) => _messages[i],
+                  reverse: true,
+                );
+              } else {
+                return Container();
+              }
+            },
           )),
           Container(
             height: 100,

@@ -1,16 +1,18 @@
 import 'package:equatable/equatable.dart';
 
-class User extends Equatable {
+class Message extends Equatable {
   final String uid;
-  final String name;
-  final String email;
+  final String from;
+  final String to;
+  final String text;
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  const User({
+  const Message({
     required this.uid,
-    required this.name,
-    required this.email,
+    required this.from,
+    required this.to,
+    required this.text,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -18,8 +20,9 @@ class User extends Equatable {
   @override
   List<Object> get props => [
         uid,
-        name,
-        email,
+        from,
+        to,
+        text,
         createdAt,
         updatedAt,
       ];
