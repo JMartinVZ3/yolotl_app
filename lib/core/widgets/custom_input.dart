@@ -39,18 +39,18 @@ class CustomInput extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(kBorderRadius),
           borderSide: const BorderSide(
-            color: YolotlColors.orange,
+            color: YolotlColors.yellow,
             width: 5.0,
           ),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(kBorderRadius),
           borderSide: const BorderSide(
-            color: YolotlColors.orange,
+            color: YolotlColors.yellow,
             width: 5.0,
           ),
         ),
-        fillColor: YolotlColors.orange,
+        fillColor: YolotlColors.yellow,
         hoverColor: Colors.red,
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(kBorderRadius),
@@ -64,14 +64,14 @@ class CustomInput extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(kBorderRadius),
           borderSide: const BorderSide(
-            color: YolotlColors.orange,
+            color: YolotlColors.yellow,
             width: 5.0,
           ),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(kBorderRadius),
           borderSide: const BorderSide(
-            color: YolotlColors.orange,
+            color: YolotlColors.yellow,
             width: 5.0,
           ),
         ),

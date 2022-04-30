@@ -1,3 +1,4 @@
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:yolotl/config/common.dart';
 import 'package:yolotl/config/routes/app_routes.dart';
 import 'package:yolotl/core/widgets/widgets.dart';
@@ -12,7 +13,7 @@ class LoginPage extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: YolotlColors.white,
+      backgroundColor: YolotlColors.lightYellow,
       body: _Body(
         controller: controller,
       ),
@@ -30,48 +31,78 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Spacer(
-        flex: 1,
-      ),
-      Text(
-        'Iniciar Sesión',
-        style: Get.textTheme.headline1,
-      ),
-      Expanded(
-        flex: 4,
-        child: Container(
-            decoration: BoxDecoration(
-          image: DecorationImage(
-              image: Image.asset('assets/illustration1.png').image),
-        )),
-      ),
-      Spacer(
-        flex: 1,
-      ),
-      _LoginForm(controller: controller),
-      Spacer(
-        flex: 1,
-      ),
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-        child: OrangeButton(
-          text: 'Iniciar Sesión',
-          onPressed: () {
-            controller.validateLogin();
-          },
+    return SingleChildScrollView(
+      child: Column(children: [
+        const SizedBox(
+          height: 40,
         ),
-      ),
-      TextButton(
-        onPressed: () {
-          Get.toNamed(Routes.REGISTER);
-        },
-        child: Text('No tienes una cuenta? Regístrate'),
-      ),
-      Spacer(
-        flex: 1,
-      ),
-    ]);
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+          child: Text(
+            '¡Bienvenido! ¿Listo para cuidar a tu Yolotl?',
+            style: Get.textTheme.headline4,
+            textAlign: TextAlign.center,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Material(
+            color: Colors.yellow,
+            clipBehavior: Clip.antiAlias,
+            borderRadius: BorderRadius.circular(10),
+            child: InkWell(
+              onTap: () {},
+              child: Container(
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const FaIcon(
+                        FontAwesomeIcons.google,
+                        size: kIconSize,
+                        color: YolotlColors.lightYellow,
+                      ),
+                      Text(
+                        "Iniciar sesión con Google",
+                        style: Get.textTheme.bodyText1!.copyWith(fontSize: 14),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        _LoginForm(controller: controller),
+        const SizedBox(
+          height: 40,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+          child: OrangeButton(
+            text: 'Iniciar Sesión',
+            onPressed: () {
+              controller.validateLogin();
+            },
+          ),
+        ),
+        TextButton(
+          onPressed: () {
+            Get.toNamed(Routes.REGISTER);
+          },
+          child: Text(
+            'No tienes una cuenta? Regístrate',
+            style: Get.textTheme.bodyText1!.copyWith(fontSize: 14),
+          ),
+        ),
+      ]),
+    );
   }
 }
 
@@ -85,11 +116,19 @@ class _LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
       child: Form(
         key: controller.formKey,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+              "Ingresa el correo de tu tutor",
+              style: Get.textTheme.bodyText1!.copyWith(fontSize: 16),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
             CustomInput(
               placeholder: 'Email',
               textController: controller.emailCtrl,
@@ -97,8 +136,15 @@ class _LoginForm extends StatelessWidget {
               isEmail: true,
               keyboardType: TextInputType.emailAddress,
             ),
-            SizedBox(
+            const SizedBox(
               height: kDefaultPadding,
+            ),
+            Text(
+              "Contraseña",
+              style: Get.textTheme.bodyText1!.copyWith(fontSize: 16),
+            ),
+            const SizedBox(
+              height: 10,
             ),
             CustomInput(
               placeholder: 'Contraseña',

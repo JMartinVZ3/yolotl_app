@@ -11,8 +11,8 @@ abstract class Routes {
   ///Ruta
   static const String REGISTER = '/auth/register';
 
-    ///Ruta
-  static const String START = '/auth/register';
+  ///Ruta
+  static const String START = '/auth/start';
 
   ///==============HOME===========///
   ///Ruta

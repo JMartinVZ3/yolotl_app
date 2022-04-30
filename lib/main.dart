@@ -5,6 +5,7 @@ import 'package:yolotl/core/controllers/helper_controller.dart';
 import 'package:yolotl/features/auth/view/bindings/loading_binding.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yolotl/features/auth/view/controllers/user_controller.dart';
 
 import 'di/injection_container.dart' as di;
 
@@ -24,9 +25,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       onReady: () {
         Get.put(HelperController());
+        Get.put(UserController());
       },
       debugShowCheckedModeBanner: false,
-      title: 'Festa',
+      title: 'Yolotl',
       theme: lightTheme,
       initialRoute: Routes.LOADING,
       initialBinding: LoadingBinding(),

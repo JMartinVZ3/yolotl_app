@@ -4,7 +4,9 @@ import 'package:yolotl/features/auth/view/pages/loading_page.dart';
 import 'package:yolotl/features/auth/view/pages/login_page.dart';
 import 'package:yolotl/features/auth/view/pages/register_page.dart';
 import 'package:yolotl/features/auth/view/pages/start_page.dart';
+import 'package:yolotl/features/home/view/bindings/chat_binding.dart';
 import 'package:yolotl/features/home/view/bindings/menu_binding.dart';
+import 'package:yolotl/features/home/view/pages/chat_page.dart';
 import 'package:yolotl/features/home/view/pages/menu_page.dart';
 import 'package:get/get.dart';
 
@@ -40,6 +42,12 @@ abstract class AppPages {
       name: Routes.MENU,
       page: () => MenuPage(),
       binding: MenuBinding(),
+    ),
+
+    GetPage<dynamic>(
+      name: Routes.CHAT,
+      page: () => ChatPage(),
+      binding: ChatBinding(),
     ),
   ];
 }
