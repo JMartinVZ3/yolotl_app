@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:yolotl/config/colors.dart';
 import 'package:yolotl/config/routes/app_routes.dart';
 import 'package:yolotl/core/services/auth_service.dart';
+import 'package:yolotl/features/auth/services/google_signin_service.dart';
 import 'package:yolotl/features/home/view/controllers/yolotl_controller.dart';
 import 'package:yolotl/features/home/view/widgets/widgets.dart';
 
@@ -111,6 +112,7 @@ class MenuPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             child: InkWell(
               onTap: () async {
+                await GoogleSignInService.signOut();
                 await AuthService.deleteToken();
                 Get.back();
                 Get.back();

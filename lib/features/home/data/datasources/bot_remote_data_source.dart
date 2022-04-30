@@ -46,7 +46,9 @@ class BotRemoteDataSourceImpl implements BotRemoteDataSource {
     if (response.statusCode == 200) {
       final completionResponse = completionResponseFromJson(response.body);
 
-      return completionResponse.data.choices[0].text.trim();
+      return completionResponse.data.choices[0].text
+          .trim()
+          .replaceAll("Ajolote: ", "");
     } else {
       throw ServerException();
     }
