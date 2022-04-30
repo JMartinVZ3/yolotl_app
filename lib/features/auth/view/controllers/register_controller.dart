@@ -3,7 +3,9 @@ import 'package:yolotl/core/error/failure.dart';
 import 'package:yolotl/core/helpers/helpers.dart';
 import 'package:yolotl/di/injection_container.dart';
 import 'package:yolotl/features/auth/domain/entities/user.dart';
+import 'package:yolotl/features/auth/domain/usecases/google_sign_up.dart';
 import 'package:yolotl/features/auth/domain/usecases/user_register.dart';
+import 'package:yolotl/features/auth/services/google_signin_service.dart';
 import 'package:yolotl/features/auth/view/controllers/user_controller.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +19,9 @@ class RegisterController extends GetxController {
 
   /// Importamos funcion que crea la cuenta del usuario
   final UserRegister userRegister = sl<UserRegister>();
+
+  /// Importamos funcion que hace el registro del usuario por google
+  final GoogleSignUp googleSignUp = sl<GoogleSignUp>();
 
   //! Form Keys
   /// Key con la que validamos el formulario del registro
@@ -45,6 +50,18 @@ class RegisterController extends GetxController {
     _handleUserRegister(result);
   }
 
+  /// Implementation Function to Start the google Sign Up
+  Future<void> remoteGoogleSignUp({required String token}) async {
+    showLoading();
+
+    final Either<Failure, User> result =
+        await googleSignUp.call(GoogleSignUpParams(
+      token: token,
+    ));
+
+    _handleGoogleSignUp(result);
+  }
+
   //! Handlers
 
   // handle api fetch result
@@ -67,7 +84,35 @@ class RegisterController extends GetxController {
     });
   }
 
+  // handle api fetch result
+  void _handleGoogleSignUp(Either<Failure, User> result) {
+    result.fold((failure) {
+      GoogleSignInService.signOut();
+
+      /// Removemos el showLoading()
+      Get.back();
+
+      Get.snackbar('Error', _mapFailureToMessage(failure),
+          snackPosition: SnackPosition.BOTTOM);
+    }, (data) {
+      /// Le pasamos la data obtenida al controlador del motel
+      Get.find<UserController>().user = data;
+
+      /// Removemos el showLoading()
+      Get.back();
+
+      /// Vamos a la pagina principal de la app
+      Get.toNamed(Routes.MENU);
+    });
+  }
+
   //! Functions
+
+  Future<void> validateGoogleSignUp() async {
+    final String? token = await GoogleSignInService.signInWithGoogle();
+    if (token == null) return;
+    await remoteGoogleSignUp(token: token);
+  }
 
   /// validar los valores de los controladores de texto
   Future<void> validateRegister() async {

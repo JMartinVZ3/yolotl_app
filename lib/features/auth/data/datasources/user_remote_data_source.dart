@@ -22,6 +22,14 @@ abstract class UserRemoteDataSource {
     required String password,
     required String name,
   });
+
+  Future<UserModel> googleSignUp({
+    required String token,
+  });
+
+  Future<UserModel> googleSignIn({
+    required String token,
+  });
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -118,5 +126,63 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   Future _guardarToken(String token) async {
     return await _storage.write(key: 'token', value: token);
+  }
+
+  @override
+  Future<UserModel> googleSignIn({required String token}) async {
+    final endPoint = Uri.https(uri, '/api/v1/login/google');
+
+    final Map<String, String> data = <String, String>{
+      'token': token,
+    };
+
+    final response =
+        await http.post(endPoint, body: jsonEncode(data), headers: {
+      'Content-Type': 'application/json',
+    });
+
+    if (response.statusCode == 200) {
+      final loginResponse = loginResponseFromJson(response.body);
+      await _guardarToken(loginResponse.token);
+      return loginResponse.user;
+    } else if (response.statusCode == 404) {
+      throw EmailException();
+    } else if (response.statusCode == 400) {
+      throw PasswordException();
+    } else if (response.statusCode == 401) {
+      throw InactiveException();
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<UserModel> googleSignUp({required String token}) async {
+    final endPoint = Uri.https(uri, '/api/v1/login/google/new');
+
+    final Map<String, String> data = <String, String>{
+      'token': token,
+    };
+
+    log(token);
+
+    final response =
+        await http.post(endPoint, body: jsonEncode(data), headers: {
+      'Content-Type': 'application/json',
+    });
+
+    log(response.body.toString());
+
+    log(response.statusCode.toString());
+
+    if (response.statusCode == 200) {
+      final loginResponse = loginResponseFromJson(response.body);
+      await _guardarToken(loginResponse.token);
+      return loginResponse.user;
+    } else if (response.statusCode == 400) {
+      throw RegisterException();
+    } else {
+      throw ServerException();
+    }
   }
 }

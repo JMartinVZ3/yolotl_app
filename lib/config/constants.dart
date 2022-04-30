@@ -8,7 +8,7 @@
 const double kDefaultPadding = 30.0;
 
 // border radius
-const double kBorderRadius = 20.0;
+const double kBorderRadius = 10.0;
 
 // padding of the top of the app
 const double kTopPadding = 60.0;

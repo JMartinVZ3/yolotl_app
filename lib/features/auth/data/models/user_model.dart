@@ -6,7 +6,7 @@ UserModel userFromJson(String str) => UserModel.fromJson(json.decode(str));
 String userToJson(UserModel data) => json.encode(data.toJson());
 
 class UserModel extends User {
-  UserModel({
+  const UserModel({
     required String uid,
     required String name,
     required String email,

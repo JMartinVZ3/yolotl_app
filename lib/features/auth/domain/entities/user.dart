@@ -7,7 +7,7 @@ class User extends Equatable {
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  User({
+  const User({
     required this.uid,
     required this.name,
     required this.email,

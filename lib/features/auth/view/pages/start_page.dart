@@ -23,31 +23,66 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: YolotlColors.lightYellow,
+      decoration: BoxDecoration(
+        color: YolotlColors.lightYellow,
+        image: DecorationImage(
+            image: Image.asset('images/fondoColores.png').image,
+            fit: BoxFit.cover),
+      ),
       child: Column(children: [
-        Expanded(
-          flex: 5,
-          child:
-          Container(
-              decoration: BoxDecoration(
-            image: DecorationImage(
-                image: Image.asset('images/yolotl3.jpeg').image),
-          )),
-        ),
-        Text(
-          'Cuidando a mi Yolotl',
-          style: Get.textTheme.headline1,
+        const Spacer(
+          flex: 4,
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: kDefaultPadding, vertical: 10),
-          child: Text(
-            "",
-            style: Get.textTheme.bodyText2,
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Column(
+            children: [
+              Stack(
+                children: [
+                  Positioned(
+                    top: 6,
+                    right: 2,
+                    child: Text(
+                      'CUIDANDO',
+                      style: Get.textTheme.headline1!.copyWith(
+                        fontSize: 60,
+                        color: YolotlColors.orange,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Text(
+                    'CUIDANDO',
+                    style: Get.textTheme.headline1!.copyWith(
+                      fontSize: 60,
+                      color: YolotlColors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+              Text(
+                'A MI YOLOTL',
+                style: Get.textTheme.headline1!.copyWith(
+                  fontSize: 60,
+                  color: YolotlColors.black,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
         ),
+        Expanded(
+          flex: 6,
+          child: Container(
+              decoration: BoxDecoration(
+            image: DecorationImage(
+                image: Image.asset('images/ajolote1.png').image,
+                fit: BoxFit.contain),
+          )),
+        ),
         const Spacer(
-          flex: 1,
+          flex: 2,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
@@ -59,7 +94,7 @@ class _Body extends StatelessWidget {
           ),
         ),
         const Spacer(
-          flex: 1,
+          flex: 2,
         ),
       ]),
     );

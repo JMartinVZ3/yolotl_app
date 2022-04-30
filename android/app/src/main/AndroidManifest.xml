@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.yolotl">
+    package="com.hackathon.yolotl">
    <application
         android:label="yolotl"
         android:name="${applicationName}"

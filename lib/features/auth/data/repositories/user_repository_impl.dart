@@ -1,5 +1,3 @@
-
-
 import 'package:yolotl/core/error/exceptions.dart';
 import 'package:yolotl/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
@@ -66,6 +64,31 @@ class UserRepositoryImpl implements UserRepository {
     }
   }
 
+  @override
+  Future<Either<Failure, User>> googleSignIn({required String token}) async {
+    try {
+      final remoteUser = await remoteDataSource.googleSignIn(token: token);
+      return Right(remoteUser);
+    } on ServerException {
+      return Left(ServerFailure());
+    } on EmailException {
+      return Left(EmailFailure());
+    } on PasswordException {
+      return Left(PasswordFailure());
+    } on InactiveException {
+      return Left(InactiveFailure());
+    }
+  }
 
-
+  @override
+  Future<Either<Failure, User>> googleSignUp({required String token}) async {
+    try {
+      final remoteUser = await remoteDataSource.googleSignUp(token: token);
+      return Right(remoteUser);
+    } on ServerException {
+      return Left(ServerFailure());
+    } on RegisterException {
+      return Left(RegisterFailure());
+    }
+  }
 }

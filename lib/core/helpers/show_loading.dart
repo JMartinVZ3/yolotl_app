@@ -15,7 +15,7 @@ void showLoading() {
               BoxDecoration(borderRadius: BorderRadius.circular(kBorderRadius)),
           child: const LinearProgressIndicator(
             color: YolotlColors.orange,
-            backgroundColor: Colors.grey,
+            backgroundColor: YolotlColors.lightYellow,
           ),
         ),
       ),
